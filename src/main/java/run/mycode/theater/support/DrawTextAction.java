@@ -1,8 +1,5 @@
 package run.mycode.theater.support;
 
-import org.code.media.Color;
-import org.code.media.Font;
-import org.code.media.FontStyle;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
@@ -13,21 +10,16 @@ public class DrawTextAction implements SceneAction {
     private final int x;
     private final int y;
     private final double rotation;
-    private final int textHeight;
     private final Font font;
-    private final FontStyle fontStyle;
     private final java.awt.Color textColor;
 
-    public DrawTextAction(String text, int x, int y, double rotation, int textHeight, Font font, FontStyle fontStyle,
-                          Color textColor) {
+    public DrawTextAction(String text, int x, int y, double rotation, Font font, Color textColor) {
         this.text = text;
         this.x = x;
         this.y = y;
         this.rotation = rotation;
-        this.textHeight = textHeight;
         this.font = font;
-        this.fontStyle = fontStyle;
-        this.textColor = Color.convertToAWTColor(textColor);
+        this.textColor = textColor;
     }
 
     /**
@@ -42,8 +34,7 @@ public class DrawTextAction implements SceneAction {
         if (rotation != 0) {
             context.rotate(Math.toRadians(rotation), x, y);
         }
-        java.awt.Font sizedFont = FontHelper.getFont(font, fontStyle).deriveFont((float) textHeight);
-        context.setFont(sizedFont);
+        context.setFont(font);
         context.setColor(textColor);
         context.drawString(text, x, y);
         if (rotation != 0) {

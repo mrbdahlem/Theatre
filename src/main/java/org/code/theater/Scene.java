@@ -8,6 +8,7 @@ import org.code.media.util.AudioUtils;
 import run.mycode.theater.support.*;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class Scene {
      * @param color new background color
      */
     public final void clear(Color color) {
-        this.actions.add(new ClearSceneAction(color));
+        this.actions.add(new ClearSceneAction(Color.convertToAWTColor(color)));
     }
 
     /**
@@ -185,9 +186,8 @@ public class Scene {
     public final void drawImage(Image image, int x, int y, int size, double rotation) {
         // Copy the image so subsequent changes to this image object are not reflected
         // in the image drawn here.
-        Image imageCopy = new Image(image);
-        this.actions.add(
-                new DrawImageAction(imageCopy, x, y, size, UNSPECIFIED, UNSPECIFIED, rotation));
+        BufferedImage imageCopy = new Image(image).getBufferedImage();
+        this.actions.add(new DrawImageAction(imageCopy, x, y, size, UNSPECIFIED, UNSPECIFIED, rotation));
     }
 
     /**
@@ -204,7 +204,7 @@ public class Scene {
     public final void drawImage(Image image, int x, int y, int width, int height, double rotation) {
         // Copy the image so subsequent changes to this image object are not reflected
         // in the image drawn here.
-        Image imageCopy = new Image(image);
+        BufferedImage imageCopy = new Image(image).getBufferedImage();
         this.actions.add(new DrawImageAction(imageCopy, x, y, UNSPECIFIED, width, height, rotation));
     }
 
@@ -309,9 +309,10 @@ public class Scene {
      * @param rotation the rotation or tilt of the text, in degrees
      */
     public final void drawText(String text, int x, int y, double rotation) {
+        java.awt.Font sizedFont = FontHelper.getFont(font, fontStyle).deriveFont((float) textHeight);
         this.actions.add(
                 new DrawTextAction(
-                        text, x, y, rotation, this.textHeight, this.font, this.fontStyle, this.textColor));
+                        text, x, y, rotation, sizedFont, Color.convertToAWTColor(this.textColor)));
     }
 
     /**
@@ -323,14 +324,12 @@ public class Scene {
      * @param endY the end Y coordinate of the line.
      */
     public final void drawLine(int startX, int startY, int endX, int endY) {
+        Color lineColor = this.strokeColor;
+        if (lineColor == null) {
+            lineColor = DEFAULT_COLOR;
+        }
         this.actions.add(
-                new DrawLineAction(
-                        startX,
-                        startY,
-                        endX,
-                        endY,
-                        this.strokeColor == null ? DEFAULT_COLOR : this.strokeColor,
-                        this.strokeWidth));
+                new DrawLineAction(startX, startY, endX, endY, Color.convertToAWTColor(lineColor), this.strokeWidth));
     }
 
     /**
@@ -344,7 +343,8 @@ public class Scene {
     public final void drawRegularPolygon(int x, int y, int sides, int radius) {
         this.actions.add(
                 new DrawPolygonAction(
-                        x, y, sides, radius, this.strokeColor, this.fillColor, this.strokeWidth));
+                        x, y, sides, radius, Color.convertToAWTColor(this.strokeColor),
+                        Color.convertToAWTColor(this.fillColor), this.strokeWidth));
     }
 
     /**
@@ -358,7 +358,8 @@ public class Scene {
      */
     public final void drawShape(int[] points, boolean close) {
         this.actions.add(
-                new DrawShapeAction(points, close, this.strokeColor, this.fillColor, this.strokeWidth));
+                new DrawShapeAction(points, close, Color.convertToAWTColor(this.strokeColor),
+                        Color.convertToAWTColor(this.fillColor), this.strokeWidth));
     }
 
     /**
@@ -371,8 +372,8 @@ public class Scene {
      */
     public final void drawEllipse(int x, int y, int width, int height) {
         this.actions.add(
-                new DrawEllipseAction(
-                        x, y, width, height, this.strokeColor, this.fillColor, this.strokeWidth));
+                new DrawEllipseAction(x, y, width, height, Color.convertToAWTColor(this.strokeColor),
+                        Color.convertToAWTColor(this.fillColor), this.strokeWidth));
     }
 
     /**
@@ -386,7 +387,8 @@ public class Scene {
     public final void drawRectangle(int x, int y, int width, int height) {
         this.actions.add(
                 new DrawRectangleAction(
-                        x, y, width, height, this.strokeColor, this.fillColor, this.strokeWidth));
+                        x, y, width, height, Color.convertToAWTColor(this.strokeColor),
+                        Color.convertToAWTColor(this.fillColor), this.strokeWidth));
     }
 
     /**

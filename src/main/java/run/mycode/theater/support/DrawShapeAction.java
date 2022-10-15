@@ -1,14 +1,13 @@
 package run.mycode.theater.support;
 
-import org.code.media.Color;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
 
 public class DrawShapeAction implements SceneAction {
     private final boolean close;
-    private final java.awt.Color strokeColor;
-    private final java.awt.Color fillColor;
+    private final Color strokeColor;
+    private final Color fillColor;
     private final float strokeWidth;
     private final int[] xPoints;
     private final int[] yPoints;
@@ -27,8 +26,8 @@ public class DrawShapeAction implements SceneAction {
         }
 
         this.close = close;
-        this.strokeColor = Color.convertToAWTColor(strokeColor);
-        this.fillColor = Color.convertToAWTColor(fillColor);
+        this.strokeColor = strokeColor;
+        this.fillColor = fillColor;
         this.strokeWidth = (float)strokeWidth;
     }
 

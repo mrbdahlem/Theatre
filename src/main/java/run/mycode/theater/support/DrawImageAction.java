@@ -1,14 +1,29 @@
 package run.mycode.theater.support;
 
-import org.code.media.Image;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class DrawImageAction implements SceneAction {
     public static final int UNSPECIFIED = -1;
-    public DrawImageAction(Image imageCopy, int x, int y, int size, int width, int height, double rotation) {
-        // TODO: Draw image
+    private final BufferedImage image;
+    private final int x;
+    private final int y;
+    private final int size;
+    private final int width;
+    private final int height;
+    private final double rotation;
+
+    public DrawImageAction(BufferedImage imageCopy, int x, int y, int size, int width, int height, double rotation) {
+        this.image = imageCopy;
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.width = width;
+        this.height = height;
+        this.rotation = rotation;
     }
 
     /**
@@ -19,6 +34,19 @@ public class DrawImageAction implements SceneAction {
      */
     @Override
     public void go(Graphics2D context, Stage stage) {
-        throw new UnsupportedOperationException(this.getClass().getName() + " not implemented");
+        if (rotation != 0) {
+            AffineTransform transform = new AffineTransform();
+            double widthScale = (double) width / image.getWidth();
+            double heightScale = (double) height / image.getHeight();
+            // create a transform that moves the location of the image to (x,y), rotates around
+            // the top left corner of the image and scales the image to width and height
+            // Note: order of transforms is important, do not reorder these calls
+            transform.translate(x, y);
+            transform.rotate(Math.toRadians(rotation), 0, 0);
+            transform.scale(widthScale, heightScale);
+            context.drawImage(image, transform, null);
+        } else {
+            context.drawImage(image, x, y, width, height, null);
+        }
     }
 }

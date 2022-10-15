@@ -1,22 +1,20 @@
 package run.mycode.theater.support;
 
-import org.code.media.Color;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
 
 public class DrawPolygonAction implements SceneAction {
 
-    private final java.awt.Color strokeColor;
-    private final java.awt.Color fillColor;
+    private final Color strokeColor;
+    private final Color fillColor;
     private final float strokeWidth;
-
     private final Polygon polygon;
 
     public DrawPolygonAction(int x, int y, int sides, int radius, Color strokeColor, Color fillColor,
                              double strokeWidth) {
-        this.strokeColor = Color.convertToAWTColor(strokeColor);
-        this.fillColor = Color.convertToAWTColor(fillColor);
+        this.strokeColor = strokeColor;
+        this.fillColor = fillColor;
         this.strokeWidth = (float)strokeWidth;
 
         polygon = new Polygon();

@@ -1,6 +1,5 @@
 package run.mycode.theater.support;
 
-import org.code.media.Color;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
@@ -10,7 +9,7 @@ public class DrawLineAction implements SceneAction {
     private final int startY;
     private final int endX;
     private final int endY;
-    private final java.awt.Color color;
+    private final Color color;
     private final float strokeWidth;
 
     public DrawLineAction(int startX, int startY, int endX, int endY, Color color, double strokeWidth) {
@@ -19,7 +18,7 @@ public class DrawLineAction implements SceneAction {
         this.startY = startY;
         this.endX = endX;
         this.endY = endY;
-        this.color = Color.convertToAWTColor(color);
+        this.color = color;
         this.strokeWidth = (float)strokeWidth;
     }
 

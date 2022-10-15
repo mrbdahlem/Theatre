@@ -1,6 +1,5 @@
 package run.mycode.theater.support;
 
-import org.code.media.Color;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
@@ -10,8 +9,8 @@ public class DrawRectangleAction implements SceneAction {
     private final int y;
     private final int width;
     private final int height;
-    private final java.awt.Color strokeColor;
-    private final java.awt.Color fillColor;
+    private final Color strokeColor;
+    private final Color fillColor;
     private final float strokeWidth;
 
     public DrawRectangleAction(int x, int y, int width, int height, Color strokeColor, Color fillColor,
@@ -20,8 +19,8 @@ public class DrawRectangleAction implements SceneAction {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.strokeColor = Color.convertToAWTColor(strokeColor);
-        this.fillColor = Color.convertToAWTColor(fillColor);
+        this.strokeColor = strokeColor;
+        this.fillColor = fillColor;
         this.strokeWidth = (float)strokeWidth;
     }
 

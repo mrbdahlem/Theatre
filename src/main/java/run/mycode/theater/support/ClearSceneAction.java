@@ -1,19 +1,18 @@
 package run.mycode.theater.support;
 
-import org.code.media.Color;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
 
 public class ClearSceneAction implements SceneAction {
-    private final java.awt.Color color;
+    private final Color color;
 
     public ClearSceneAction(Color color) {
         if (color == null) {
-            this.color = java.awt.Color.BLACK;
+            this.color = Color.BLACK;
         }
         else {
-            this.color = Color.convertToAWTColor(color);
+            this.color = color;
         }
     }
 
