@@ -20,13 +20,12 @@ public class DrawPolygonAction implements SceneAction {
         this.strokeWidth = (float)strokeWidth;
 
         polygon = new Polygon();
-        for (int side = 0; side < sides; side++) {
-            double angle = (Math.PI/2) + ((2*Math.PI * side) / sides);
-            int xp = x + (int)(radius * Math.sin(angle));
-            int yp = y + (int)(radius * Math.cos(angle));
-            polygon.addPoint(xp, yp);
+        double theta = 2 * Math.PI / sides;
+        for (int i = 0; i < sides; i++) {
+            int xCoordinate = (int) (Math.cos(theta * i) * radius) + x;
+            int yCoordinate = (int) (Math.sin(theta * i) * radius) + y;
+            polygon.addPoint(xCoordinate, yCoordinate);
         }
-
     }
 
     /**
@@ -37,11 +36,15 @@ public class DrawPolygonAction implements SceneAction {
      */
     @Override
     public void go(Graphics2D context, Stage stage) {
-        context.setColor(fillColor);
-        context.fillPolygon(polygon);
+        if (fillColor != null) {
+            context.setColor(fillColor);
+            context.fillPolygon(polygon);
+        }
 
-        context.setStroke(new BasicStroke(strokeWidth));
-        context.setColor(strokeColor);
-        context.drawPolygon(polygon);
+        if (strokeColor != null) {
+            context.setStroke(new BasicStroke(strokeWidth));
+            context.setColor(strokeColor);
+            context.drawPolygon(polygon);
+        }
     }
 }

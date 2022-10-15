@@ -9,7 +9,12 @@ public class ClearSceneAction implements SceneAction {
     private final java.awt.Color color;
 
     public ClearSceneAction(Color color) {
-        this.color = Color.convertToAWTColor(color);
+        if (color == null) {
+            this.color = java.awt.Color.BLACK;
+        }
+        else {
+            this.color = Color.convertToAWTColor(color);
+        }
     }
 
     /**

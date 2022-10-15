@@ -13,23 +13,26 @@ public class Prompter {
     private boolean stop = false;
     private boolean hold = false;
 
+    /**
+     * Create a prompter to run a show
+     * @param script the list of actions to perform for the show
+     * @param stage the stage on which the show will be performed
+     */
     public Prompter(List<SceneAction> script, Stage stage) {
         this.script = script;
         this.stage = stage;
     }
 
+    /**
+     * Begin playing the show
+     */
     public void runShow() {
         final Graphics2D context = stage.getGraphicsContext();
         final Thread t = new Thread(()-> {
             for (SceneAction action : script) {
                 // Handle a pause
                 while (hold) {
-                    try {
-                        Thread.sleep(100L);
-                    } catch (InterruptedException e) {
-                        context.dispose();
-                        return;
-                    }
+                    Thread.yield();
                 }
 
                 // Handle a stop
@@ -43,5 +46,21 @@ public class Prompter {
         });
 
         t.start();
+    }
+
+    /**
+     * Stop running the show
+     */
+    public void stop() {
+        this.stop = true;
+    }
+
+    /**
+     * Toggle pausing the show
+     * @return true if the show is now paused
+     */
+    public boolean togglePause() {
+        this.hold = !this.hold;
+        return this.hold;
     }
 }

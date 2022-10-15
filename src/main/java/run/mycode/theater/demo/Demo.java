@@ -53,6 +53,15 @@ public class Demo {
         for (int i = 3; i < 9; i++) {
             demoScene.drawRegularPolygon(200, 200, i, 200 - (i * 20));
         }
+        demoScene.pause(1);
+
+        int[] starPoints = {0, 85, 75, 75, 100, 10, 125, 75, 200, 85, 150, 125,
+                160, 190, 100, 150, 40, 190, 50, 125, 0, 85};
+
+        demoScene.clear(Color.AQUA);
+        demoScene.setStrokeColor(Color.BLACK);
+        demoScene.setFillColor(Color.BEIGE);
+        demoScene.drawShape(starPoints, true);
 
         Theater.playScenes(demoScene);
     }

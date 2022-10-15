@@ -33,11 +33,15 @@ public class DrawEllipseAction implements SceneAction {
      */
     @Override
     public void go(Graphics2D context, Stage stage) {
-        context.setColor(fillColor);
-        context.fillOval(x, y, width, height);
+        if (fillColor != null) {
+            context.setColor(fillColor);
+            context.fillOval(x, y, width, height);
+        }
 
-        context.setStroke(new BasicStroke(strokeWidth));
-        context.setColor(strokeColor);
-        context.drawOval(x, y, width, height);
+        if (strokeColor != null) {
+            context.setStroke(new BasicStroke(strokeWidth));
+            context.setColor(strokeColor);
+            context.drawOval(x, y, width, height);
+        }
     }
 }

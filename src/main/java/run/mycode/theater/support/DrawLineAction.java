@@ -31,8 +31,10 @@ public class DrawLineAction implements SceneAction {
      */
     @Override
     public void go(Graphics2D context, Stage stage) {
-        context.setStroke(new BasicStroke(strokeWidth));
-        context.setColor(color);
-        context.drawLine(startX, startY, endX, endY);
+        if (color != null) {
+            context.setStroke(new BasicStroke(strokeWidth));
+            context.setColor(color);
+            context.drawLine(startX, startY, endX, endY);
+        }
     }
 }

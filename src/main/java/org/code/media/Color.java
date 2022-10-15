@@ -140,6 +140,9 @@ public class Color {
     }
 
     public static java.awt.Color convertToAWTColor(Color c) {
+        if (c == null) {
+            return null;
+        }
         return new java.awt.Color(c.getRed(), c.getGreen(), c.getBlue());
     }
 
