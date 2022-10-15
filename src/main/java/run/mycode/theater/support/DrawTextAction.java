@@ -6,11 +6,28 @@ import org.code.media.FontStyle;
 import run.mycode.theater.Stage;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class DrawTextAction implements SceneAction {
+    private final String text;
+    private final int x;
+    private final int y;
+    private final double rotation;
+    private final int textHeight;
+    private final Font font;
+    private final FontStyle fontStyle;
+    private final java.awt.Color textColor;
+
     public DrawTextAction(String text, int x, int y, double rotation, int textHeight, Font font, FontStyle fontStyle,
                           Color textColor) {
-        // TODO: Draw text
+        this.text = text;
+        this.x = x;
+        this.y = y;
+        this.rotation = rotation;
+        this.textHeight = textHeight;
+        this.font = font;
+        this.fontStyle = fontStyle;
+        this.textColor = Color.convertToAWTColor(textColor);
     }
 
     /**
@@ -21,6 +38,17 @@ public class DrawTextAction implements SceneAction {
      */
     @Override
     public void go(Graphics2D context, Stage stage) {
-        throw new UnsupportedOperationException(this.getClass().getName() + " not implemented");
+        AffineTransform originalTransform = context.getTransform();
+        if (rotation != 0) {
+            context.rotate(Math.toRadians(rotation), x, y);
+        }
+        java.awt.Font sizedFont = FontHelper.getFont(font, fontStyle).deriveFont((float) textHeight);
+        context.setFont(sizedFont);
+        context.setColor(textColor);
+        context.drawString(text, x, y);
+        if (rotation != 0) {
+            // reset to original transform if we rotated
+            context.setTransform(originalTransform);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package run.mycode.theater.demo;
 
 import org.code.media.Color;
+import org.code.media.Font;
+import org.code.media.FontStyle;
 import org.code.theater.Scene;
 import org.code.theater.Theater;
 
@@ -62,6 +64,18 @@ public class Demo {
         demoScene.setStrokeColor(Color.BLACK);
         demoScene.setFillColor(Color.BEIGE);
         demoScene.drawShape(starPoints, true);
+        demoScene.pause(1);
+
+        demoScene.clear(Color.FUCHSIA);
+        demoScene.setTextColor(Color.GOLD);
+        demoScene.setTextHeight(24);
+        demoScene.setTextStyle(Font.SERIF, FontStyle.BOLD);
+
+        for (int i = 0; i <= 180; i += 20) {
+            demoScene.drawText("JAVA RULES", 200, 200, 180 - i);
+        }
+        demoScene.setTextColor(Color.BLACK);
+        demoScene.drawText("JAVA RULES", 200, 200, 0);
 
         Theater.playScenes(demoScene);
     }
