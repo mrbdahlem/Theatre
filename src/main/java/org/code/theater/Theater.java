@@ -24,7 +24,7 @@ public final class Theater {
             allActions.addAll(scene.getActions());
         }
 
-        Stage stage = new Stage();
-        stage.show(allActions);
+        Stage stage = new Stage(allActions);
+        stage.perform();
     }
 }
