@@ -1,5 +1,4 @@
 package org.code.theater;
-import run.mycode.theater.Prompter;
 import run.mycode.theater.Stage;
 import run.mycode.theater.support.SceneAction;
 

@@ -2,14 +2,13 @@ package run.mycode.theater;
 
 import run.mycode.theater.support.SceneAction;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class Prompter {
 
-    private List<SceneAction> script;
-    private Stage stage;
+    private final List<SceneAction> script;
+    private final Stage stage;
 
     private boolean stop = false;
     private boolean hold = false;
@@ -31,7 +30,7 @@ public class Prompter {
                         context.dispose();
                         return;
                     }
-                };
+                }
 
                 // Handle a stop
                 if (stop) {

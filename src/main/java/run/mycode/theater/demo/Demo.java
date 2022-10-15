@@ -54,7 +54,6 @@ public class Demo {
             demoScene.drawRegularPolygon(200, 200, i, 200 - (i * 20));
         }
 
-        Theater theatre = new Theater();
-        theatre.playScenes(demoScene);
+        Theater.playScenes(demoScene);
     }
 }

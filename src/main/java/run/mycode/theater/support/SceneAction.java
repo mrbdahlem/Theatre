@@ -10,5 +10,5 @@ public interface SceneAction {
      * @param context the graphics context upon which to perform the action
      * @param stage the stage where the scene is taking place
      */
-    public void go(Graphics2D context, Stage stage);
+    void go(Graphics2D context, Stage stage);
 }

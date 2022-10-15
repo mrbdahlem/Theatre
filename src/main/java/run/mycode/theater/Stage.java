@@ -16,7 +16,7 @@ public class Stage extends JFrame {
     private JPanel contentPane;
     private Prompter prompter;
 
-    private Image displayImage;
+    private final Image displayImage;
     private final BufferedImage workingImage;
 
     public Stage(List<SceneAction> allActions) {

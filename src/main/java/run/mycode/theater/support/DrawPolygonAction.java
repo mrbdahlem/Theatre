@@ -6,10 +6,7 @@ import run.mycode.theater.Stage;
 import java.awt.*;
 
 public class DrawPolygonAction implements SceneAction {
-    private final int x;
-    private final int y;
-    private final int sides;
-    private final int radius;
+
     private final java.awt.Color strokeColor;
     private final java.awt.Color fillColor;
     private final float strokeWidth;
@@ -18,10 +15,6 @@ public class DrawPolygonAction implements SceneAction {
 
     public DrawPolygonAction(int x, int y, int sides, int radius, Color strokeColor, Color fillColor,
                              double strokeWidth) {
-        this.x = x;
-        this.y = y;
-        this.sides = sides;
-        this.radius = radius;
         this.strokeColor = Color.convertToAWTColor(strokeColor);
         this.fillColor = Color.convertToAWTColor(fillColor);
         this.strokeWidth = (float)strokeWidth;
