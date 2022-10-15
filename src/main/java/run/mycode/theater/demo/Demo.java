@@ -71,8 +71,8 @@ public class Demo {
         demoScene.setTextHeight(24);
         demoScene.setTextStyle(Font.SERIF, FontStyle.BOLD);
 
-        for (int i = 0; i <= 180; i += 20) {
-            demoScene.drawText("JAVA RULES", 200, 200, 180 - i);
+        for (int i = 0; i < 360; i += 20) {
+            demoScene.drawText("JAVA RULES", 200, 200, 360 - i);
         }
         demoScene.setTextColor(Color.BLACK);
         demoScene.drawText("JAVA RULES", 200, 200, 0);

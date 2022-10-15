@@ -33,11 +33,15 @@ public class DrawRectangleAction implements SceneAction {
      */
     @Override
     public void go(Graphics2D context, Stage stage) {
-        context.setColor(fillColor);
-        context.fillRect(x, y, width, height);
+        if (fillColor != null) {
+            context.setColor(fillColor);
+            context.fillRect(x, y, width, height);
+        }
 
-        context.setStroke(new BasicStroke(strokeWidth));
-        context.setColor(strokeColor);
-        context.drawRect(x, y, width, height);
+        if (strokeColor != null) {
+            context.setStroke(new BasicStroke(strokeWidth));
+            context.setColor(strokeColor);
+            context.drawRect(x, y, width, height);
+        }
     }
 }
