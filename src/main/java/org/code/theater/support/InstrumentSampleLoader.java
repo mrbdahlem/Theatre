@@ -48,7 +48,7 @@ public class InstrumentSampleLoader {
      * @param note
      * @return filename of sample, or null if no sample is found.
      */
-    public String getSampleFilePath(Instrument instrument, int note) {
+    public URL getSampleFilePath(Instrument instrument, int note) {
         if (!instrumentFileMap.containsKey(instrument)) {
             System.out.printf("No notes available for instrument %s%n", instrument);
             return null;
@@ -60,15 +60,6 @@ public class InstrumentSampleLoader {
             return null;
         }
 
-        final URL resourceUrl = getClass().getClassLoader().getResource(noteToFileMap.get(note));
-        if (resourceUrl == null) {
-            return null;
-        }
-
-        try {
-            return Paths.get(resourceUrl.toURI()).toString();
-        } catch (URISyntaxException e) {
-            return null;
-        }
+        return getClass().getClassLoader().getResource(noteToFileMap.get(note));
     }
 }

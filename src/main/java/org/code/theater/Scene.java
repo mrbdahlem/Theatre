@@ -133,13 +133,8 @@ public class Scene {
      * @param seconds length of the note.
      */
     public final void playNote(Instrument instrument, int note, double seconds) {
-        try {
-            URL noteFile = new File(instrumentFiles.getSampleFilePath(instrument, note)).toURI().toURL();
-            this.actions.add(new PlayNoteAction(noteFile, seconds));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e); // Convert exception for simpler student code
-        }
-
+        URL noteFile = instrumentFiles.getSampleFilePath(instrument, note);
+        this.actions.add(new PlayNoteAction(noteFile, seconds));
     }
 
     /**
