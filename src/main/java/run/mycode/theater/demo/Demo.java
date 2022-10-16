@@ -8,8 +8,6 @@ import org.code.theater.Instrument;
 import org.code.theater.Scene;
 import org.code.theater.Theater;
 
-import java.net.URL;
-
 public class Demo {
     public static void main(String[] args) {
         Scene demoScene = new Scene();
@@ -90,8 +88,7 @@ public class Demo {
         demoScene.pause(1);
 
         // Draw 4 rotated copies of a sample image on the background
-        URL demoImageURL = Demo.class.getResource("/sampleImageBeach.jpg");
-        Image demoImage = new Image(demoImageURL);
+        Image demoImage = new Image("sampleImageBeach.jpg");
         demoScene.drawImage(demoImage, 0, 0, 200);
         demoScene.drawImage(demoImage, 400, 0, 200, 90);
         demoScene.drawImage(demoImage, 400, 400, 200, 200, 180);
@@ -103,8 +100,7 @@ public class Demo {
         demoScene.playNote(Instrument.PIANO, 64, 2);
         demoScene.playNoteAndPause(Instrument.PIANO, 67, 2);
 
-        URL demoSoundURL = Demo.class.getResource("/beatbox.wav");
-        demoScene.playSound(demoSoundURL);
+        demoScene.playSound("beatbox.wav");
 
         Theater.playScenes(demoScene);
     }

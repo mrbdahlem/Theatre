@@ -36,6 +36,9 @@ public class FontHelper {
             for (String filename : FONT_FILE_NAMES) {
                 String filePath = FONT_FOLDER_NAME + "/" + filename;
                 InputStream fileStream = FontHelper.class.getClassLoader().getResourceAsStream(filePath);
+                if (fileStream == null) {
+                    throw new RuntimeException("could not load font: " + filename);
+                }
                 fontMap.put(filename, java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, fileStream));
                 fileStream.close();
             }

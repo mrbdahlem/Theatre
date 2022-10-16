@@ -2,6 +2,7 @@ package org.code.media;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -26,23 +27,6 @@ public class Image {
             this.bufferedImage = Image.getImageAssetFromFile(filename);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e); // Convert to a runtime exception
-        }
-        this.width = bufferedImage.getWidth();
-        this.height = bufferedImage.getHeight();
-        // don't create pixel array until we need it
-        this.pixels = null;
-    }
-
-    /**
-     * Creates a new image object, using the pixel information from a file at a given URL.
-     *
-     * @param imageURL
-     */
-    public Image(URL imageURL) {
-        try {
-            this.bufferedImage = Image.getImageFromUrl(imageURL);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
         this.width = bufferedImage.getWidth();
         this.height = bufferedImage.getHeight();
@@ -191,13 +175,17 @@ public class Image {
      */
     public static BufferedImage getImageAssetFromFile(String filename) throws FileNotFoundException {
         try {
-            return Image.getImageFromUrl(new URL(filename));
+            URL fileURL = Image.class.getResource("/" + filename);
+            if (fileURL == null) {
+                fileURL = new File(filename).toURI().toURL();
+            }
+            return Image.getImageFromUrl(fileURL);
         } catch (IOException e) {
             throw new FileNotFoundException(filename);
         }
     }
 
-    public static BufferedImage getImageFromUrl(URL url) throws FileNotFoundException {
+    private static BufferedImage getImageFromUrl(URL url) throws FileNotFoundException {
         BufferedImage originalImage;
         try {
             originalImage = ImageIO.read(url);

@@ -86,7 +86,11 @@ public class Scene {
      */
     public final void playSound(String filename) {
         try {
-            this.playSound(new File(filename).toURI().toURL());
+            URL fileURL = this.getClass().getResource("/" + filename);
+            if (fileURL == null) {
+                fileURL = new File(filename).toURI().toURL();
+            }
+            this.playSound(fileURL);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e); // Convert to runtime exception for student code
         }
@@ -97,7 +101,7 @@ public class Scene {
      *
      * @param url the file to play.
      */
-    public final void playSound(URL url) {
+    private final void playSound(URL url) {
         this.actions.add(new PlaySoundAction(url));
     }
 
