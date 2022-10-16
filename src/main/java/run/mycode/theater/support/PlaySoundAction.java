@@ -1,11 +1,9 @@
 package run.mycode.theater.support;
 
-import org.code.media.util.AudioUtils;
 import run.mycode.theater.Stage;
 
 import javax.sound.sampled.*;
 import java.awt.*;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 

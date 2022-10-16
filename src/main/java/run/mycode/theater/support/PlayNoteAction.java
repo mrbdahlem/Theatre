@@ -1,13 +1,32 @@
 package run.mycode.theater.support;
 
-import org.code.theater.Instrument;
 import run.mycode.theater.Stage;
 
+import javax.sound.sampled.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 
 public class PlayNoteAction implements SceneAction {
-    public PlayNoteAction(Instrument instrument, int note, double seconds) {
-        //TODO: Play note
+    private Clip clip;
+
+    public PlayNoteAction(URL note, double seconds) {
+        try {
+            AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(note);
+            AudioFormat audioFormat = fileFormat.getFormat();
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(note);
+            long framesOfAudioToCopy = (long)(seconds * audioFormat.getFrameRate());
+
+            if (framesOfAudioToCopy > fileFormat.getFrameLength()) {
+                throw new UnsupportedOperationException("Note duration too long");
+            }
+            AudioInputStream shortenedStream = new AudioInputStream(inputStream, audioFormat, framesOfAudioToCopy);
+            clip = AudioSystem.getClip();
+            clip.open(shortenedStream);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            clip = null;
+            throw new RuntimeException(e); // Convert exceptions for simpler student code
+        }
     }
 
     /**
@@ -18,6 +37,9 @@ public class PlayNoteAction implements SceneAction {
      */
     @Override
     public void go(Graphics2D context, Stage stage) {
-        throw new UnsupportedOperationException(this.getClass().getName() + " not implemented");
+        if (clip == null) {
+            return;
+        }
+        clip.start();
     }
 }

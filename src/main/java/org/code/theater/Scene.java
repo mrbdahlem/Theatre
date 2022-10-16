@@ -4,6 +4,7 @@ import org.code.media.Color;
 import org.code.media.Font;
 import org.code.media.FontStyle;
 import org.code.media.Image;
+import org.code.theater.support.InstrumentSampleLoader;
 import run.mycode.theater.support.*;
 
 import java.awt.image.BufferedImage;
@@ -25,6 +26,8 @@ public class Scene {
     static final Color DEFAULT_COLOR = Color.BLACK;
     static final double DEFAULT_STROKE_WIDTH = 1.0;
     static final Instrument DEFAULT_INSTRUMENT = Instrument.PIANO;
+
+    static final InstrumentSampleLoader instrumentFiles = new InstrumentSampleLoader();
 
     private final List<SceneAction> actions;
 
@@ -130,7 +133,13 @@ public class Scene {
      * @param seconds length of the note.
      */
     public final void playNote(Instrument instrument, int note, double seconds) {
-        this.actions.add(new PlayNoteAction(instrument, note, seconds));
+        try {
+            URL noteFile = new File(instrumentFiles.getSampleFilePath(instrument, note)).toURI().toURL();
+            this.actions.add(new PlayNoteAction(noteFile, seconds));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e); // Convert exception for simpler student code
+        }
+
     }
 
     /**

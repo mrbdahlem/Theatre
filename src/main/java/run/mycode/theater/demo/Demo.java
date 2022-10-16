@@ -4,6 +4,7 @@ import org.code.media.Color;
 import org.code.media.Font;
 import org.code.media.FontStyle;
 import org.code.media.Image;
+import org.code.theater.Instrument;
 import org.code.theater.Scene;
 import org.code.theater.Theater;
 
@@ -90,6 +91,9 @@ public class Demo {
 
         demoScene.pause(1);
         URL demoSoundURL = Demo.class.getResource("/beatbox.wav");
+        demoScene.playNoteAndPause(Instrument.PIANO, 80, 1);
+        demoScene.playNoteAndPause(Instrument.PIANO, 82, 1);
+        demoScene.playNoteAndPause(Instrument.PIANO, 83, 1);
         demoScene.playSound(demoSoundURL);
 
         Theater.playScenes(demoScene);
