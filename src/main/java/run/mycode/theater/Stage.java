@@ -26,14 +26,15 @@ public class Stage extends JFrame {
 
         setContentPane(contentPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
         setResizable(false);
+        pack();
         setVisible(true);
 
         playButton.addActionListener(event -> perform());
 
         displayImage = new BufferedImage(Constants.THEATER_WIDTH, Constants.THEATER_HEIGHT, BufferedImage.TYPE_INT_RGB);
         workingImage = new BufferedImage(Constants.THEATER_WIDTH, Constants.THEATER_HEIGHT, BufferedImage.TYPE_INT_RGB);
+
     }
 
     public Graphics2D getGraphicsContext() {
