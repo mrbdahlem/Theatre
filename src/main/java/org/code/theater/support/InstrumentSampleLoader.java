@@ -1,11 +1,10 @@
 package org.code.theater.support;
 
-import java.net.URISyntaxException;
+import org.code.theater.Instrument;
+
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import org.code.theater.Instrument;
 
 public class InstrumentSampleLoader {
 
