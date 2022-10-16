@@ -29,7 +29,7 @@ checkout the code in your IDE to start right off:
 * [BlueJ](https://github.com/mrbdahlem/BlueJTheater)
 * [Eclipse](https://github.com/mrbdahlem/EclipseTheater)
 * [IntelliJ](https://github.com/mrbdahlem/IntelliJTheater)
-* [NetBeans]()
+* [NetBeans](https://github.com/mrbdahlem/NetbeansTheater)
 
 ## Where can I get documentation for the Theater?
 [Code.org](https://code.org) provides some wonderful 
