@@ -3,9 +3,13 @@ package run.mycode.theater;
 import org.code.theater.support.Constants;
 import run.mycode.theater.support.SceneAction;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 
 public class Stage extends JFrame {
@@ -14,10 +18,17 @@ public class Stage extends JFrame {
     private JPanel stage;
     private JButton playButton;
     private JPanel contentPane;
-    private Prompter prompter;
+    private JLabel inspectLabel;
+    private JButton crosshairToggle;
 
+    private Prompter prompter;
     private final Image displayImage;
     private final BufferedImage workingImage;
+
+    private boolean showCrosshair = false;
+
+    private ImageIcon crosshairIcon = null;
+    private ImageIcon pressedCrosshairIcon = null;
 
     public Stage(List<SceneAction> allActions) {
         super("Theatre");
@@ -31,10 +42,26 @@ public class Stage extends JFrame {
         setVisible(true);
 
         playButton.addActionListener(event -> perform());
+        crosshairToggle.addActionListener(event -> toggleCrosshair());
+        stage.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent event) {
+                super.mouseMoved(event);
+                displayMouseInfo(event);
+            }
+        });
 
         displayImage = new BufferedImage(Constants.THEATER_WIDTH, Constants.THEATER_HEIGHT, BufferedImage.TYPE_INT_RGB);
         workingImage = new BufferedImage(Constants.THEATER_WIDTH, Constants.THEATER_HEIGHT, BufferedImage.TYPE_INT_RGB);
 
+
+        try {
+            crosshairIcon = new ImageIcon(ImageIO.read(this.getClass().getResource("/crosshair.png")));
+            pressedCrosshairIcon = new ImageIcon(ImageIO.read(this.getClass().getResource("/pressedCrosshair.png")));
+        }
+        catch (IOException ignored) {  }
+
+        crosshairToggle.setIcon(crosshairIcon);
     }
 
     public Graphics2D getGraphicsContext() {
@@ -76,8 +103,35 @@ public class Stage extends JFrame {
         prompter = null;
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    /**
+     * Show the mouse location on the stage
+     * @param event contains the current mouse location as the mouse moves
+     */
+    private void displayMouseInfo(MouseEvent event) {
+        if (event == null) { return; }
+        inspectLabel.setText("(" + event.getX() + "," + event.getY() + ")");
+
+        if (showCrosshair) {
+            Graphics g = stage.getGraphics();
+            g.drawImage(displayImage, 0, 0, null);
+            g.setXORMode(Color.WHITE);
+            g.drawLine(0, event.getY(), 399, event.getY());
+            g.drawLine(event.getX(), 0, event.getX(), 399);
+            g.dispose();
+        }
+    }
+
+    private void toggleCrosshair() {
+        showCrosshair = !showCrosshair;
+        if (showCrosshair) {
+            crosshairToggle.setIcon(pressedCrosshairIcon);
+        }
+        else {
+            Graphics g = stage.getGraphics();
+            g.drawImage(displayImage, 0, 0, null);
+            g.dispose();
+            crosshairToggle.setIcon(crosshairIcon);
+        }
     }
 
     {
@@ -99,10 +153,34 @@ public class Stage extends JFrame {
         contentPane.setLayout(new BorderLayout(0, 0));
         final JToolBar toolBar1 = new JToolBar();
         toolBar1.setFloatable(false);
+        toolBar1.setMaximumSize(new Dimension(400, 36));
         contentPane.add(toolBar1, BorderLayout.SOUTH);
         playButton = new JButton();
-        playButton.setText("Play");
+        playButton.setIcon(new ImageIcon(getClass().getResource("/play.png")));
+        playButton.setMaximumSize(new Dimension(38, 38));
+        playButton.setMinimumSize(new Dimension(38, 38));
+        playButton.setPreferredSize(new Dimension(38, 38));
+        playButton.setText("");
+        playButton.setToolTipText("Play");
         toolBar1.add(playButton);
+        inspectLabel = new JLabel();
+        inspectLabel.setHorizontalAlignment(4);
+        inspectLabel.setHorizontalTextPosition(4);
+        inspectLabel.setInheritsPopupMenu(false);
+        inspectLabel.setMaximumSize(new Dimension(400, 38));
+        inspectLabel.setPreferredSize(new Dimension(100, 21));
+        inspectLabel.setText("(0,0)");
+        toolBar1.add(inspectLabel);
+        final JToolBar.Separator toolBar$Separator1 = new JToolBar.Separator();
+        toolBar1.add(toolBar$Separator1);
+        crosshairToggle = new JButton();
+        crosshairToggle.setIcon(new ImageIcon(getClass().getResource("/crosshair.png")));
+        crosshairToggle.setMaximumSize(new Dimension(38, 38));
+        crosshairToggle.setMinimumSize(new Dimension(38, 38));
+        crosshairToggle.setPreferredSize(new Dimension(38, 38));
+        crosshairToggle.setText("");
+        crosshairToggle.setToolTipText("Inspect");
+        toolBar1.add(crosshairToggle);
         stage = new JPanel();
         stage.setLayout(new BorderLayout(0, 0));
         stage.setBackground(new Color(-16777216));

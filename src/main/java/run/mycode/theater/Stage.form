@@ -11,13 +11,45 @@
         <constraints border-constraint="South"/>
         <properties>
           <floatable value="false"/>
+          <maximumSize width="400" height="36"/>
         </properties>
         <border type="none"/>
         <children>
           <component id="cb094" class="javax.swing.JButton" binding="playButton">
             <constraints/>
             <properties>
-              <text value="Play"/>
+              <icon value="play.png"/>
+              <maximumSize width="38" height="38"/>
+              <minimumSize width="38" height="38"/>
+              <preferredSize width="38" height="38"/>
+              <text value=""/>
+              <toolTipText value="Play"/>
+            </properties>
+          </component>
+          <component id="bf0b6" class="javax.swing.JLabel" binding="inspectLabel">
+            <constraints/>
+            <properties>
+              <horizontalAlignment value="4"/>
+              <horizontalTextPosition value="4"/>
+              <inheritsPopupMenu value="false"/>
+              <maximumSize width="400" height="38"/>
+              <preferredSize width="100" height="21"/>
+              <text value="(0,0)"/>
+            </properties>
+          </component>
+          <component id="34ee5" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="eeca8" class="javax.swing.JButton" binding="crosshairToggle">
+            <constraints/>
+            <properties>
+              <icon value="crosshair.png"/>
+              <maximumSize width="38" height="38"/>
+              <minimumSize width="38" height="38"/>
+              <preferredSize width="38" height="38"/>
+              <text value=""/>
+              <toolTipText value="Inspect"/>
             </properties>
           </component>
         </children>
