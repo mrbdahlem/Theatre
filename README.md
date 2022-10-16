@@ -3,24 +3,29 @@ This project takes the [Code.org](https://code.org) Theatre
 and breaks it free of the Java Lab so that you can use it in
 the local IDE as you prefer.
 
-## What can I make with The Theater?
+## What can I do with The Theater?
 In Unit 4 of the Code.org AP CSA curriculum, students are
 introduced to The Theater and explore its components and
 functionality. Students use the classes and methods provided
 by the Theater to play sounds, create drawings, and show
-images.
+images. 
+
+This version of the Theater takes that ability and brings
+it to your local computer so that you can more easily integrate
+version control, asset files, and the use of a professional or
+educational IDE as you choose.
 
 ## How can I use it?
-The theatre.jar file in the [Packages](https://github.com/users/mrbdahlem/packages?repo_name=Theatre)
+The ```theatre-_VERSION_NUMER_.jar``` file in the [Packages](https://github.com/users/mrbdahlem/packages?repo_name=Theatre)
 page for this project can be added as a library in a project
 in your IDE to give you the full functionality provided by
-the code.org Theatre in Java Lab, but running as a local
+the Code.org Theater in Java Lab, but running as a local
 program on your computer. Projects that you create can be
 packaged up as .jar files themselves and become executable
 by themselves on any computer with a JRE installed.
 
-You can also use your IDE to clone one of the following 
-repositories to start right off:
+You can also clone one of the following repositories and
+checkout the code in your IDE to start right off:
 * [BlueJ]()
 * [Eclipse]()
 * [IntelliJ]()
