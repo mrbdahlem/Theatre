@@ -14,4 +14,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub mrbdahlem Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/mrbdahlem/Theatre</url>
+        </repository>
+    </distributionManagement>
 </project>
