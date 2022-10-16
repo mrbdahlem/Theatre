@@ -6,7 +6,7 @@
 
     <groupId>run.mycode</groupId>
     <artifactId>theater</artifactId>
-    <version>1.0-SNAPSHOT-3</version>
+    <version>1.0-SNAPSHOT-4</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -25,25 +25,12 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>run.mycode.theater.demo.Demo</mainClass>
-                        </manifest>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
                 </configuration>
             </plugin>
         </plugins>
