@@ -26,9 +26,10 @@ by themselves on any computer with a JRE installed.
 
 You can also clone one of the following repositories and
 checkout the code in your IDE to start right off:
-* [BlueJ]()
+* [BlueJ](https://github.com/mrbdahlem/BlueJTheater)
 * [Eclipse]()
 * [IntelliJ]()
+* [NetBeans]()
 
 ## Where can I get documentation for the Theater?
 [Code.org](https://code.org) provides some wonderful 
