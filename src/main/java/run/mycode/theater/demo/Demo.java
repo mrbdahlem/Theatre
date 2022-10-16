@@ -88,6 +88,10 @@ public class Demo {
         demoScene.drawImage(demoImage, 400, 400, 200, 200, 180);
         demoScene.drawImage(demoImage, 0, 400, 200, 270);
 
+        demoScene.pause(1);
+        URL demoSoundURL = Demo.class.getResource("/beatbox.wav");
+        demoScene.playSound(demoSoundURL);
+
         Theater.playScenes(demoScene);
     }
 }

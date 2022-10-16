@@ -182,7 +182,7 @@ public final class AudioUtils {
      *
      * @param filepath local path
      * @return samples
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException, UnsupportedAudioFileException
      */
     public static double[] readSamplesFromLocalFile(String filepath)
             throws FileNotFoundException, UnsupportedAudioFileException {

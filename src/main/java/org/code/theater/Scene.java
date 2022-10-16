@@ -4,12 +4,12 @@ import org.code.media.Color;
 import org.code.media.Font;
 import org.code.media.FontStyle;
 import org.code.media.Image;
-import org.code.media.util.AudioUtils;
 import run.mycode.theater.support.*;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +94,19 @@ public class Scene {
      */
     public final void playSound(String filename) {
         try {
-            this.playSound(AudioUtils.readSamplesFromAssetFile(filename));
-        } catch (FileNotFoundException | UnsupportedAudioFileException e) {
+            this.playSound(new File(filename).toURI().toURL());
+        } catch (MalformedURLException e) {
             throw new RuntimeException(e); // Convert to runtime exception for student code
         }
+    }
+
+    /**
+     * Plays the sound referenced by the URL.
+     *
+     * @param url the file to play.
+     */
+    public final void playSound(URL url) {
+        this.actions.add(new PlaySoundAction(url));
     }
 
     /**
