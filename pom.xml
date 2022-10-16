@@ -6,7 +6,7 @@
 
     <groupId>run.mycode</groupId>
     <artifactId>theater</artifactId>
-    <version>1.0-SNAPSHOT-2</version>
+    <version>1.0-SNAPSHOT-3</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -21,4 +21,31 @@
             <url>https://maven.pkg.github.com/mrbdahlem/Theatre</url>
         </repository>
     </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>run.mycode.theater.demo.Demo</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
