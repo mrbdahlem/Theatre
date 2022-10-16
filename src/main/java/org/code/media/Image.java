@@ -17,8 +17,7 @@ public class Image {
     private static final int MAX_HEIGHT = 400;
 
     /**
-     * Creates a new image object, using the pixel information from the file uploaded to the asset
-     * manager.
+     * Creates a new image object, using the pixel information from a file on the local drive
      *
      * @param filename the name of the image loaded into the asset manager for the project
      */
@@ -27,6 +26,23 @@ public class Image {
             this.bufferedImage = Image.getImageAssetFromFile(filename);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e); // Convert to a runtime exception
+        }
+        this.width = bufferedImage.getWidth();
+        this.height = bufferedImage.getHeight();
+        // don't create pixel array until we need it
+        this.pixels = null;
+    }
+
+    /**
+     * Creates a new image object, using the pixel information from a file at a given URL.
+     *
+     * @param imageURL
+     */
+    public Image(URL imageURL) {
+        try {
+            this.bufferedImage = Image.getImageFromUrl(imageURL);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
         this.width = bufferedImage.getWidth();
         this.height = bufferedImage.getHeight();
@@ -181,7 +197,7 @@ public class Image {
         }
     }
 
-    private static BufferedImage getImageFromUrl(URL url) throws FileNotFoundException {
+    public static BufferedImage getImageFromUrl(URL url) throws FileNotFoundException {
         BufferedImage originalImage;
         try {
             originalImage = ImageIO.read(url);

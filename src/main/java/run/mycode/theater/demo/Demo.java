@@ -3,8 +3,11 @@ package run.mycode.theater.demo;
 import org.code.media.Color;
 import org.code.media.Font;
 import org.code.media.FontStyle;
+import org.code.media.Image;
 import org.code.theater.Scene;
 import org.code.theater.Theater;
+
+import java.net.URL;
 
 public class Demo {
     public static void main(String[] args) {
@@ -76,6 +79,14 @@ public class Demo {
         }
         demoScene.setTextColor(Color.BLACK);
         demoScene.drawText("JAVA RULES", 200, 200, 0);
+        demoScene.pause(1);
+
+        URL demoImageURL = Demo.class.getResource("/sampleImageBeach.jpg");
+        Image demoImage = new Image(demoImageURL);
+        demoScene.drawImage(demoImage, 0, 0, 200);
+        demoScene.drawImage(demoImage, 400, 0, 200, 90);
+        demoScene.drawImage(demoImage, 400, 400, 200, 200, 180);
+        demoScene.drawImage(demoImage, 0, 400, 200, 270);
 
         Theater.playScenes(demoScene);
     }

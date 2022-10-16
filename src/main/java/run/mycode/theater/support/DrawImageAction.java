@@ -11,7 +11,6 @@ public class DrawImageAction implements SceneAction {
     private final BufferedImage image;
     private final int x;
     private final int y;
-    private final int size;
     private final int width;
     private final int height;
     private final double rotation;
@@ -20,10 +19,18 @@ public class DrawImageAction implements SceneAction {
         this.image = imageCopy;
         this.x = x;
         this.y = y;
-        this.size = size;
+        this.rotation = Math.toRadians(rotation);
+
+        if (size != UNSPECIFIED) {
+            // If the "size" value was provided, we need to scale the height proportionally.
+            width = size;
+            final int imageHeight = imageCopy.getHeight();
+            final int imageWidth = imageCopy.getWidth();
+            height = (int) ((double) imageHeight * ((double) width / (double) imageWidth));
+        }
+
         this.width = width;
         this.height = height;
-        this.rotation = rotation;
     }
 
     /**
@@ -42,7 +49,7 @@ public class DrawImageAction implements SceneAction {
             // the top left corner of the image and scales the image to width and height
             // Note: order of transforms is important, do not reorder these calls
             transform.translate(x, y);
-            transform.rotate(Math.toRadians(rotation), 0, 0);
+            transform.rotate(rotation, 0, 0);
             transform.scale(widthScale, heightScale);
             context.drawImage(image, transform, null);
         } else {

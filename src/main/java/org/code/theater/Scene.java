@@ -246,8 +246,7 @@ public class Scene {
      * @param height the height to draw the image on the canvas
      * @param rotation the amount to rotate the image in degrees
      */
-    public final void drawImage(
-            String filename, int x, int y, int width, int height, double rotation) {
+    public final void drawImage(String filename, int x, int y, int width, int height, double rotation) {
         this.drawImage(new Image(filename), x, y, width, height, rotation);
     }
 

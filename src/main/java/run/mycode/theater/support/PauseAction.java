@@ -8,7 +8,7 @@ public class PauseAction implements SceneAction {
     private final double seconds;
 
     public PauseAction(double seconds) {
-        this.seconds = seconds;
+        this.seconds = Math.max(seconds, 0.1);
     }
 
     /**
