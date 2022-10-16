@@ -77,17 +77,6 @@ public class Scene {
     }
 
     /**
-     * Plays the array of samples provided.
-     *
-     * @param sound an array of samples to play.
-     */
-    public final void playSound(double[] sound) {
-        // Copy the array here so subsequent changes to it are not reflected
-        // in the sound played here.
-        this.actions.add(new PlaySoundAction(sound.clone()));
-    }
-
-    /**
      * Plays the sound referenced by the file name.
      *
      * @param filename the file to play in the asset manager.

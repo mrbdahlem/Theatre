@@ -22,19 +22,6 @@ public class PlaySoundAction implements SceneAction {
         }
     }
 
-    public PlaySoundAction(double[] sound) {
-        try {
-            byte[] data = AudioUtils.convertDoubleArrayToByteArray(sound);
-            ByteArrayInputStream bais = new ByteArrayInputStream(data);
-            AudioInputStream ais = AudioSystem.getAudioInputStream(bais);
-
-            clip = AudioSystem.getClip();
-            clip.open(ais);
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Perform the SceneAction
      *
