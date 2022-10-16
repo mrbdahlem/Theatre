@@ -28,7 +28,7 @@ You can also clone one of the following repositories and
 checkout the code in your IDE to start right off:
 * [BlueJ](https://github.com/mrbdahlem/BlueJTheater)
 * [Eclipse]()
-* [IntelliJ]()
+* [IntelliJ](https://github.com/mrbdahlem/IntelliJTheater)
 * [NetBeans]()
 
 ## Where can I get documentation for the Theater?
