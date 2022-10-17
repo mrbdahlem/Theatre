@@ -34,4 +34,4 @@ checkout the code in your IDE to start right off:
 ## Where can I get documentation for the Theater?
 [Code.org](https://code.org) provides some wonderful 
 [documentation](https://studio.code.org/docs/ide/javalab/classes/Theater)
-for use with Java Lab.
+for use with Java Lab, the same should cover this version.
